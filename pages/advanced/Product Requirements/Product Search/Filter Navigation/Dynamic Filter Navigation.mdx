@@ -1,0 +1,89 @@
+
+# Dynamic Filter Navigation & Programmatic Population of Content
+
+**Priority:** High
+
+## Overview
+
+The filter navigation is a critical element for guiding users through product categories and subcategories on an eCommerce platform. Enhanced control over filter navigation enables better SEO management and shapes the user experience. This CMS enhancement allows the web and SEO teams to control crawler accessibility, refinement URLs, and dynamic metadata, ultimately improving search visibility and providing better contextual information.
+
+## Implementation Requirements
+
+### 1. CMS Controlled Refinement Hyperlinks
+
+- **CMS Enhancement:** Add a toggle switch or checkbox within the CMS for each subcategory and refinement option. This enables the SEO/web team to control the crawlability of various facets, ensuring seamless integration with other CMS workflows.
+- **User Selection Options:** 
+  - **Crawlable:** Allows search engine crawlers to index and follow links.
+  - **Non-Crawlable:** Prevents crawlers from indexing or following links.
+
+- **API Response Hook:** Create a custom hook that returns a boolean, determining whether a refinement URL path is rendered in the filter navigation.
+
+### 2. Conditional Navigational Paths
+
+- **Conditional Rendering:** Render subcategory and refinement hyperlinks based on the API response.
+- **Example Implementation:**
+  - **Crawlable Option:**
+    ```html
+    <button type="button" aria-checked="false" aria-label="Add filter: Blue (109)">
+      <a href="/filter/blue">Blue (109)</a>
+    </button>
+    ```
+  - **Non-Crawlable Option:**
+    ```html
+    <button type="button" aria-checked="false" aria-label="Add filter: Blue (109)">
+      Blue (109)
+    </button>
+    ```
+- **Server-Side Rendering:** Include crawlable hyperlinks in the initial HTTP response for search engines.
+
+### 3. Refinement URLs
+
+- **Unique URLs for Refinements:** Generate distinct SEO-friendly URLs for each category, subcategory, and refinement selection.
+
+  **URL Structure:**
+  - **Base URL:** `/category/subcategory/`
+  - **Single Refinement:** `/category/subcategory/refinement-value/`
+  - **Multiple Refinements (Same Group):** `/category/subcategory/refinement-value1+refinement-value2/`
+  - **Multiple Refinement Groups:** `/category/subcategory/refinementGroup1-value1/refinementGroup2-value2/`
+
+- **Key Principles:**
+  - **Priority-Based Ordering:** Ensures consistent URL generation.
+  - **Unique URLs:** Prevents duplicate content issues.
+  - **Hyphens as Separators** for refinement groups.
+  - **Pluses (+)** for multiple values within the same group.
+
+  **Example:** `/category/sub-category/color=red+blue/size=20ml`
+
+### 4. Dynamic Page Titles
+
+- **Dynamic Titles Reflecting Active Filters:** Generate page titles based on selected filters.
+
+  **Ordering Examples:**
+  - **L3 PLP + Brand:** `"Shop all [BRAND] [L3] | [BOOTS] [L1]"`
+  - **L3 PLP + Condition:** `"Browse all [L3] for [CONDITION] | [BOOTS] [L1]"`
+
+  **Maximum Refinements:** If three or more refinements are selected, default to the base category title (e.g., `"Shop all Pain Relief Products | Boots Pharmacy"`).
+
+### 5. Dynamic Meta Descriptions
+
+- **Dynamic Meta Content:** Generate meta descriptions based on selected filters.
+
+  **Ordering Examples:**
+  - **L3 PLP + Brand:** `"Shop our complete range of [BRAND] [L3] products. [ADVANTAGE CARD]. [DELIVERY]"`
+  - **L3 PLP + Condition:** `"Check out our extensive range of [L3] products for [CONDITION]. [ADVANTAGE CARD]. [DELIVERY]"`
+
+  **Maximum Refinements:** If three or more refinements are selected, revert to the default category meta description (e.g., `"Explore our range of Pain Relief Products. Collect Advantage Card points on every purchase. Free delivery on orders over £15+"`).
+
+### 6. Dynamic Heading Tags
+
+- **Dynamic H1 Headings:** Reflect active filters in H1 tags, reverting to default when exceeding specified limits.
+
+  **Ordering Examples:**
+  - **L3 PLP + Brand:** `"[BRAND] [L3]"` (e.g., `"Anadin Pain relief"`)
+  - **L3 PLP + Condition:** `"[L3] for [CONDITION]"` (e.g., `"Pain relief for Back pain"`)
+
+  **Maximum Refinements:** Use default H1 heading for more than three refinements (e.g., `"Pain Relief Products"`).
+
+## Conclusion
+
+Implementing CMS-controlled filter navigation empowers SEO and web teams to manage filter navigation links for crawlers and users. Dynamically generating URLs, page titles, meta descriptions, and headings based on selected refinements enhances user experience and SEO for category and product listing pages.
