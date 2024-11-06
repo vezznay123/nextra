@@ -1,18 +1,25 @@
-import React from 'react'
-import { DocsThemeConfig } from 'nextra-theme-docs'
+import React from 'react';
+import { DocsThemeConfig } from 'nextra-theme-docs';
 
 const config: DocsThemeConfig = {
-  logo: <span>My Project</span>,
+  logo: <span>SEO Recommendations & Requirements</span>,
   project: {
-    link: 'https://github.com/shuding/nextra-docs-template',
+    link: '',
   },
   chat: {
-    link: 'https://discord.com',
+    link: 'mailto:jonathan.verrall@jellyfish.com',
   },
   docsRepositoryBase: 'https://github.com/shuding/nextra-docs-template',
   footer: {
-    text: 'Nextra Docs Template',
+    text: 'Boots | Project Condor',
   },
-}
+  sidebar: {
+    defaultMenuCollapseLevel: 1, // Controls the collapse level; 0 shows all folders, 1 collapses subfolders by default
+    toggleButton: true, // Adds a toggle button to collapse or expand the sidebar
+  },
+  toc: {
+    float: true, // Keeps the table of contents floating on scroll, if applicable
+  },
+};
 
-export default config
+export default config;
