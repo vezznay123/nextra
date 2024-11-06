@@ -14,8 +14,8 @@ const config: DocsThemeConfig = {
     text: 'Boots | Project Condor',
   },
   sidebar: {
-    defaultMenuCollapseLevel: 1, // Controls the collapse level; 0 shows all folders, 1 collapses subfolders by default
-    toggleButton: true, // Adds a toggle button to collapse or expand the sidebar
+    defaultMenuCollapseLevel: 0, // Ensures all levels stay expanded by default
+    toggleButton: true, // Adds a toggle button to control collapse manually
   },
   toc: {
     float: true, // Keeps the table of contents floating on scroll, if applicable
